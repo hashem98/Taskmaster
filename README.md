@@ -6,3 +6,13 @@
 ![lab26](./screenshots/lab26.png)
 
 -----------
+
+# Lab27
+##  For today's lab , I updated the home page and added Settings  and Task Detail Page .
+<br>
+
+![lab27](./screenshots/lab27.png)
+
+-----------
+
+
