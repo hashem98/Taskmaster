@@ -3,6 +3,8 @@ package com.example.taskmaster;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,10 +16,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.taskmaster.adapter.TaskListRecycleReviewAdapter;
+import com.example.taskmaster.enums.state;
+import com.example.taskmaster.model.Task;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity {
     public static final String TASK_TITLE_TAG = "TASK";
+    public static final String TASK_BODY_TAG = "BODY";
+    public static final String TASK_STATE_TAG = "STATE";
     public static final String USER_USERNAME_TAG = "userUsername";
     SharedPreferences preferences;
+    TaskListRecycleReviewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,43 +39,12 @@ public class HomeActivity extends AppCompatActivity {
 
         Button buttonAddTask = findViewById(R.id.buttonAddTask);
         Button buttonAllTask = findViewById(R.id.buttonAllTask);
-        Button buttonViewTaskOne = findViewById(R.id.buttonViewTaskOneHome);
-        Button buttonViewTaskTwo = findViewById(R.id.buttonViewTaskTwoHome);
-        Button buttonViewTaskThree = findViewById(R.id.buttonViewTaskThreeHome);
 
 
-        buttonViewTaskOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //String taskName = ((EditText) findViewById(R.id.editTextViewTaskTitle)).getText().toString();
 
-                Intent goToViewTaskPageIntent = new Intent(HomeActivity.this, ViewTaskActivity.class);
-                goToViewTaskPageIntent.putExtra(TASK_TITLE_TAG, "Task 1");
-                startActivity(goToViewTaskPageIntent);
-            }
-        });
 
-        buttonViewTaskTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //String taskName = ((EditText) findViewById(R.id.editTextViewTaskTitle)).getText().toString();
 
-                Intent goToViewTaskPageIntent = new Intent(HomeActivity.this, ViewTaskActivity.class);
-                goToViewTaskPageIntent.putExtra(TASK_TITLE_TAG, "Task 2");
-                startActivity(goToViewTaskPageIntent);
-            }
-        });
 
-        buttonViewTaskThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //String taskName = ((EditText) findViewById(R.id.editTextViewTaskTitle)).getText().toString();
-
-                Intent goToViewTaskPageIntent = new Intent(HomeActivity.this, ViewTaskActivity.class);
-                goToViewTaskPageIntent.putExtra(TASK_TITLE_TAG, "Task 3");
-                startActivity(goToViewTaskPageIntent);
-            }
-        });
 
         buttonAllTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(goToUserSettingsIntent);
             }
         });
+        setUpTaskListRecycleView();
 
     }
     @Override
@@ -101,5 +83,26 @@ public class HomeActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.textHomeUsernameView)).setText(getString(R.string.username_with_input, userUsername));
 
         Log.d(TAG, "hello " + userUsername );
+    }
+    private void setUpTaskListRecycleView() {
+
+        RecyclerView taskListRecycleReview = (RecyclerView) findViewById(R.id.homeTaskRecycleView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+
+        //((LinearLayoutManager)layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        taskListRecycleReview.setLayoutManager(layoutManager);
+
+
+        List<Task> taskList = new ArrayList<Task>();
+        taskList.add(new Task("tutorial", "Watch your tutorial man!", state.COMPLETE));
+        taskList.add(new Task("challenges", "Do your daily challenges ", state.IN_PROGRESS));
+        taskList.add(new Task("Reading", "Read the night away!", state.NEW));
+        taskList.add(new Task("plants", "water your plants man.", state.IN_PROGRESS));
+        taskList.add(new Task("sport", "Do your sport man", state.COMPLETE));
+
+        adapter = new TaskListRecycleReviewAdapter(taskList, this);
+
+        taskListRecycleReview.setAdapter(adapter);
+
     }
 }
