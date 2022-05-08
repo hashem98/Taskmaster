@@ -7,4 +7,7 @@
     <string name="Submitted">Submitted!</string>
     <string name="no_task_name">no name</string>
     <string name="username_with_input">Username: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_task_state">no_task_state</string>
 </resources>
