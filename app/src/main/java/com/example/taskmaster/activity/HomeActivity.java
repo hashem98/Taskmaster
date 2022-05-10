@@ -42,12 +42,23 @@ public class HomeActivity extends AppCompatActivity {
 
         Button buttonAddTask = findViewById(R.id.buttonAddTask);
         Button buttonAllTask = findViewById(R.id.buttonAllTask);
+        Button buttonDeleteTask = findViewById(R.id.buttonDeleteAllTasks);
+
         tasks = AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
 
 
 
 
+buttonDeleteTask.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        AppDatabase.getInstance(getApplicationContext()).
+                taskDao().deleteAll( AppDatabase.getInstance(getApplicationContext()).taskDao().getAll());
+        finish();
+        startActivity(getIntent());
 
+    }
+});
 
 
         buttonAllTask.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +90,7 @@ public class HomeActivity extends AppCompatActivity {
         });
         setUpTaskListRecycleView();
 
+
     }
     @Override
     protected void onResume(){
@@ -87,6 +99,7 @@ public class HomeActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.textHomeUsernameView)).setText(getString(R.string.username_with_input, userUsername));
 
         Log.d(TAG, "hello " + userUsername );
+        adapter.notifyDataSetChanged();
     }
     private void setUpTaskListRecycleView() {
 
@@ -97,5 +110,8 @@ public class HomeActivity extends AppCompatActivity {
 
         adapter = new TaskListRecycleReviewAdapter(tasks, this);
         taskListRecycleReview.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
     }
+
 }
