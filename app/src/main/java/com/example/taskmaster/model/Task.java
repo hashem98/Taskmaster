@@ -1,16 +1,43 @@
 package com.example.taskmaster.model;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import com.example.taskmaster.enums.state;
 
+import com.example.taskmaster.enums.TaskStatusEnum;
+
+import java.util.Date;
+
+
+
+@Entity(tableName = "task_data")
 public class Task {
-    String title;
-    String body;
-    com.example.taskmaster.enums.state state;
 
-    public Task(String title, String body, state state) {
+    @PrimaryKey(autoGenerate = true)
+    Long id;
+    @ColumnInfo(name = "title")
+    String title;
+    @ColumnInfo(name = "body")
+    String body;
+    @ColumnInfo(name = "state")
+    TaskStatusEnum taskStatusEnum;
+//    @ColumnInfo(name = "date")
+//    java.util.Date dateCreated;
+
+
+    public Task(String title, String body, TaskStatusEnum taskStatusEnum) {
         this.title = title;
         this.body = body;
-        this.state = state;
+        this.taskStatusEnum = taskStatusEnum;
+//        this.dateCreated = dateCreated;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -29,11 +56,19 @@ public class Task {
         this.body = body;
     }
 
-    public com.example.taskmaster.enums.state getState() {
-        return state;
+    public TaskStatusEnum getTaskStatusEnum() {
+        return taskStatusEnum;
     }
 
-    public void setState(  com.example.taskmaster.enums.state     state) {
-        this.state = state;
+    public void setTaskStatusEnum(TaskStatusEnum taskStatusEnum) {
+        this.taskStatusEnum = taskStatusEnum;
     }
+
+//    public Date getDateCreated() {
+//        return dateCreated;
+//    }
+//
+//    public void setDateCreated(Date dateCreated) {
+//        this.dateCreated = dateCreated;
+//    }
 }

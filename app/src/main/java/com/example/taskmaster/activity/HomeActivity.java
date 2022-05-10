@@ -1,4 +1,4 @@
-package com.example.taskmaster;
+package com.example.taskmaster.activity;
 
 import static android.content.ContentValues.TAG;
 
@@ -16,8 +16,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.taskmaster.R;
 import com.example.taskmaster.adapter.TaskListRecycleReviewAdapter;
-import com.example.taskmaster.enums.state;
+import com.example.taskmaster.database.AppDatabase;
+import com.example.taskmaster.enums.TaskStatusEnum;
 import com.example.taskmaster.model.Task;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     public static final String TASK_BODY_TAG = "BODY";
     public static final String TASK_STATE_TAG = "STATE";
     public static final String USER_USERNAME_TAG = "userUsername";
+    List<Task> tasks = null;
     SharedPreferences preferences;
     TaskListRecycleReviewAdapter adapter;
 
@@ -39,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Button buttonAddTask = findViewById(R.id.buttonAddTask);
         Button buttonAllTask = findViewById(R.id.buttonAllTask);
+        tasks = AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
 
 
 
@@ -89,20 +93,9 @@ public class HomeActivity extends AppCompatActivity {
         RecyclerView taskListRecycleReview = (RecyclerView) findViewById(R.id.homeTaskRecycleView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
-        //((LinearLayoutManager)layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
         taskListRecycleReview.setLayoutManager(layoutManager);
 
-
-        List<Task> taskList = new ArrayList<Task>();
-        taskList.add(new Task("tutorial", "Watch your tutorial man!", state.COMPLETE));
-        taskList.add(new Task("challenges", "Do your daily challenges ", state.IN_PROGRESS));
-        taskList.add(new Task("Reading", "Read the night away!", state.NEW));
-        taskList.add(new Task("plants", "water your plants man.", state.IN_PROGRESS));
-        taskList.add(new Task("sport", "Do your sport man", state.COMPLETE));
-
-        adapter = new TaskListRecycleReviewAdapter(taskList, this);
-
+        adapter = new TaskListRecycleReviewAdapter(tasks, this);
         taskListRecycleReview.setAdapter(adapter);
-
     }
 }

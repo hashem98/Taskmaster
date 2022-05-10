@@ -10,20 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Taskmaster">
         <activity
-            android:name=".ViewTaskActivity"
+            android:name=".activity.ViewTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".UserSettingsActivity"
+            android:name=".activity.UserSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".AddTaskActivity"
+            android:name=".activity.AddTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".AllTasksActivity"
+            android:name=".activity.AllTasksActivity"
             android:exported="false"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".activity.HomeActivity" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activity.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
