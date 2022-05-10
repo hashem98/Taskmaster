@@ -2,6 +2,7 @@ package com.example.taskmaster.dao;
 
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -19,4 +20,6 @@ public interface TaskDao {
 
     @Insert
     Long insertTask(Task task);
+    @Delete
+    public void deleteAll(List<Task> taskList);
 }
