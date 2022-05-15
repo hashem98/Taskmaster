@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
+    android:background="@color/purple_200"
     tools:context=".activity.AllTasksActivity">
 
     <TextView
@@ -15,10 +15,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.234" />
+        app:layout_constraintVertical_bias="0.23" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -32,5 +32,4 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewAllTasksHeader"
         app:srcCompat="@drawable/ic_launcher_foreground"
         tools:srcCompat="@color/purple_500" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

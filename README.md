@@ -40,6 +40,27 @@
 ![lab29](./screenshots/lab29.png)
 
 -----------
+# Lab31
+##  For today's lab ..
+* Ensured espreeso tests are functional.
+
+* Refactored Main Activity
+
+* Added styling to UI
+
+* Updated Homepage
+
+
+
+
+<br>
+
+
+![lab31](./screenshots/lab31.png)
+
+-----------
+
+
 
 
 
