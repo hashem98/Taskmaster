@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.taskmaster.R;
@@ -39,45 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        Button buttonAddTask = findViewById(R.id.buttonAddTask);
-        Button buttonAllTask = findViewById(R.id.buttonAllTask);
-        Button buttonDeleteTask = findViewById(R.id.buttonDeleteAllTasks);
-
         tasks = AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
-
-
-
-
-buttonDeleteTask.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        AppDatabase.getInstance(getApplicationContext()).
-                taskDao().deleteAll( AppDatabase.getInstance(getApplicationContext()).taskDao().getAll());
-        finish();
-        startActivity(getIntent());
-
-    }
-});
-
-
-        buttonAllTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToAllTaskActivityIntent = new Intent(HomeActivity.this, AllTasksActivity.class);
-                startActivity(goToAllTaskActivityIntent);
-            }
-        });
-
-        buttonAddTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToAddTaskActivityIntent = new Intent(HomeActivity.this, AddTaskActivity.class);
-                startActivity(goToAddTaskActivityIntent);
-            }
-
-        });
-
 
         ImageView userSettingsImageView = (ImageView) findViewById(R.id.userSettingsImage);
 
@@ -89,7 +52,8 @@ buttonDeleteTask.setOnClickListener(new View.OnClickListener() {
             }
         });
         setUpTaskListRecycleView();
-
+        setUpAddTaskButton();
+        setUpAllTasksButton();
 
     }
     @Override
@@ -112,6 +76,25 @@ buttonDeleteTask.setOnClickListener(new View.OnClickListener() {
         taskListRecycleReview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+    }
+    private void setUpAllTasksButton(){
+        LinearLayout buttonAllTask = findViewById(R.id.buttonAllTask);
+        buttonAllTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToAllTaskActivityIntent = new Intent(HomeActivity.this, AllTasksActivity.class);
+                startActivity(goToAllTaskActivityIntent);
+            }
+        });
+
+    }
+
+    private void setUpAddTaskButton(){
+        LinearLayout buttonAddTask = findViewById(R.id.buttonAddTask);
+        buttonAddTask.setOnClickListener(view -> {
+            Intent goToAddTaskActivity = new Intent(HomeActivity.this, AddTaskActivity.class);
+            startActivity(goToAddTaskActivity);
+        });
     }
 
 }

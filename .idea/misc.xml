@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2265" />
+        <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/drawable/bg_green.xml" value="0.228" />
+        <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/drawable/bg_menu.xml" value="0.2265" />
+        <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/drawable/bg_red.xml" value="0.228" />
         <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/drawable/custom_button.xml" value="0.1" />
         <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2265" />
         <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
         <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/drawable/round_outline.xml" value="0.2265" />
-        <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/layout/activity_add_task.xml" value="0.264" />
+        <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/layout/activity_add_task.xml" value="0.1" />
         <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/layout/activity_all_tasks.xml" value="0.25" />
         <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Smadi/New/Taskmaster/app/src/main/res/layout/activity_user_settings.xml" value="0.25" />
