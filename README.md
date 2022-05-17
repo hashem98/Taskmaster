@@ -59,6 +59,23 @@
 ![lab31](./screenshots/lab31.png)
 
 -----------
+# Lab32
+##  For today's lab ..
+* Updated all references to the Task data to instead use AWS Amplify to access data in DynamoDB instead of in Room.
+* Refactored Main Activity
+* Modified Add Task form to save the data entered in as a Task to DynamoDB.
+* Updated Homepage to add FloatingActionButton
+
+
+
+
+<br>
+
+
+![lab32](./screenshots/lab32.jpg)
+
+-----------
+
 
 
 

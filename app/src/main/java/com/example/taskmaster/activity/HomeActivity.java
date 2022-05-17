@@ -17,11 +17,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.example.taskmaster.R;
 import com.example.taskmaster.adapter.TaskListRecycleReviewAdapter;
 import com.example.taskmaster.database.AppDatabase;
-import com.example.taskmaster.enums.TaskStatusEnum;
-import com.example.taskmaster.model.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +46,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        tasks = AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+        tasks = new ArrayList<>();
+        try {
+            Amplify.addPlugin(new AWSDataStorePlugin());
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+
+            Log.i("Tutorial", "Initialized Amplify");
+        } catch (AmplifyException e) {
+            Log.e("Tutorial", "Could not initialize Amplify", e);
+        }
 
         ImageView userSettingsImageView = (ImageView) findViewById(R.id.userSettingsImage);
 
@@ -53,16 +68,29 @@ public class HomeActivity extends AppCompatActivity {
         });
         setUpTaskListRecycleView();
         setUpAddTaskButton();
-        setUpAllTasksButton();
 
     }
     @Override
     protected void onResume(){
         super.onResume();
-        String userUsername = preferences.getString(UserSettingsActivity.USER_USERNAME_TAG,"No nickname");
+        String userUsername = preferences.getString(UserSettingsActivity.USER_USERNAME_TAG,"No Username");
         ((TextView) findViewById(R.id.textHomeUsernameView)).setText(getString(R.string.username_with_input, userUsername));
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                success -> {
+                    Log.i(TAG, "Updated Tasks Successfully!");
+                    tasks.clear();
+                    for(Task databaseTask : success.getData()){
+                        tasks.add(databaseTask);
+                    }
+                    runOnUiThread(() -> {
+                        adapter.notifyDataSetChanged();
+                    });
+                },
 
-        Log.d(TAG, "hello " + userUsername );
+
+                failure -> Log.i(TAG, "failed with this response: ")
+        );
         adapter.notifyDataSetChanged();
     }
     private void setUpTaskListRecycleView() {
@@ -77,20 +105,10 @@ public class HomeActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
-    private void setUpAllTasksButton(){
-        LinearLayout buttonAllTask = findViewById(R.id.buttonAllTask);
-        buttonAllTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToAllTaskActivityIntent = new Intent(HomeActivity.this, AllTasksActivity.class);
-                startActivity(goToAllTaskActivityIntent);
-            }
-        });
 
-    }
 
     private void setUpAddTaskButton(){
-        LinearLayout buttonAddTask = findViewById(R.id.buttonAddTask);
+        FloatingActionButton buttonAddTask = findViewById(R.id.buttonAddTask);
         buttonAddTask.setOnClickListener(view -> {
             Intent goToAddTaskActivity = new Intent(HomeActivity.this, AddTaskActivity.class);
             startActivity(goToAddTaskActivity);

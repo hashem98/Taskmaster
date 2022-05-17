@@ -1,0 +1,14 @@
+type Task @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  taskStatusEnum: TaskStatusEnum
+
+}
+
+enum TaskStatusEnum {
+  New
+  Assigned
+  In_Progress
+  Complete
+}
