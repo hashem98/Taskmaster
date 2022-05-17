@@ -15,9 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.amplifyframework.datastore.generated.model.Task;
 import com.example.taskmaster.R;
 import com.example.taskmaster.activity.ViewTaskActivity;
-import com.example.taskmaster.model.Task;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class TaskListRecycleReviewAdapter extends RecyclerView.Adapter<TaskListR
         TextView taskFragmentTextView = (TextView) holder.itemView.findViewById(R.id.taskFragmentTextViewHome);
         taskFragmentTextView.setText(taskList.get(position).getTitle());
         String taskTitle = taskList.get(position).getTitle();
-        String taskBody = taskList.get(position).getBody();
+        String taskBody = taskList.get(position).getDescription();
         String taskState = taskList.get(position).getTaskStatusEnum().toString();
 
 
@@ -56,7 +56,6 @@ public class TaskListRecycleReviewAdapter extends RecyclerView.Adapter<TaskListR
             goToViewTaskFormIntent.putExtra(TASK_STATE_TAG, taskState);
             callingActivity.startActivity(goToViewTaskFormIntent);
         });
-
 
     }
 
