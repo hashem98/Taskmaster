@@ -26,28 +26,50 @@
         android:id="@+id/userSettingsImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_manage" />
 
     <TextView
         android:id="@+id/textHomeUsernameView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="128dp"
+        android:layout_height="25dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="195dp"
+        android:layout_marginBottom="12dp"
+        android:layout_weight="1"
         android:textColor="#FFF"
+        app:layout_constraintBottom_toTopOf="@+id/textHomeTeamNameView"
+        app:layout_constraintEnd_toStartOf="@+id/userSettingsImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textHomeTeamNameView"
+        android:layout_width="128dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="255dp"
+        android:layout_marginBottom="46dp"
+        android:layout_weight="1"
+        android:textColor="#FFF"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHomeUsernameView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeTaskRecycleView"
-        android:layout_width="301dp"
-        android:layout_height="220dp"
+        android:layout_width="297dp"
+        android:layout_height="335dp"
         android:layout_marginTop="36dp"
+        android:layout_marginBottom="54dp"
         android:textColor="#FFF"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddTask"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />

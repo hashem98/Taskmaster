@@ -2,72 +2,89 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/addTaskActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.AddTaskActivity"
-    android:background="@color/teal_200">
+    android:background="@color/teal_200"
+    >
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:text="Team"
+        android:textColor="@color/cardview_dark_background"
+        app:layout_constraintBottom_toTopOf="@+id/editAddTaskStateSpinnerTeam"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewTaskActivity"
-        android:layout_width="364dp"
-        android:layout_height="108dp"
-        android:text="Add Task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_task_two"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintVertical_bias="0.112" />
 
     <EditText
         android:id="@+id/editTextTaskTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="@string/my_tasks"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
         android:tag="asdasd"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.248"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTaskActivity"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.074"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/editTextTaskDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="@string/no_task_state"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.248"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTaskTitle"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintVertical_bias="0.129"
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/buttonAddTaskTaskActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD TASK"
+        android:text="@string/add_task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTaskDescription"
-        app:layout_constraintVertical_bias="0.582" />
+        app:layout_constraintTop_toBottomOf="@+id/editAddTaskStateSpinnerTeam"
+        app:layout_constraintVertical_bias="0.414" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Tasks: 0"
+        android:text="@string/total_tasks_0"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +107,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:text="Task Name"
+        android:text="@string/task_name"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toTopOf="@+id/editTextTaskTitle"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -98,7 +117,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:text="Task Description"
+        android:text="@string/task_description"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toTopOf="@+id/editTextTaskDescription"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -106,20 +126,30 @@
         android:id="@+id/editAddTaskStateSpinner"
         android:layout_width="360dp"
         android:layout_height="63dp"
-        android:contentDescription="@string/add_task"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddTaskTaskActivity"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTaskDescription" />
+
+    <Spinner
+        android:id="@+id/editAddTaskStateSpinnerTeam"
+        android:layout_width="360dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editAddTaskStateSpinner" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:text="State"
+        android:text="@string/state"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toTopOf="@+id/editAddTaskStateSpinner"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
