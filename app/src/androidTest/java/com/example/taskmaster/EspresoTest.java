@@ -1,4 +1,5 @@
 package com.example.taskmaster;
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -8,6 +9,9 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.Matchers.startsWith;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -50,10 +54,12 @@ public class EspresoTest {
         onView(withId(R.id.textView5)).check(matches(withText("My Tasks")));
     }
     @Test
-    public void test_All_Tasks_Activity(){
-        onView(withId(R.id.buttonAllTask)).perform(click());
-        onView(withId(R.id.textViewAllTasksHeader)).check(matches(withText("All Tasks")));
+    public void test_Team(){
+        onView(withId(R.id.textHomeTeamNameView)).check(matches(withText("Team: "+"Elves")));
+
     }
+
+
     @Test
     public void test_userSettingsImage_Activity(){
         onView(withId(R.id.userSettingsImage)).perform(click());

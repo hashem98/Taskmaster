@@ -75,6 +75,24 @@
 ![lab32](./screenshots/lab32.jpg)
 
 -----------
+# Lab33
+##  For today's lab ..
+* Updated tasks to be owned by teams.
+* Three default teams have been made; elves, robots, and humans.
+* Spinner used to select a team when creating a task was added.
+* Added ability to allow users to choose a team, and filter the tasks on the homepage corresponding to the chosen team.
+
+
+
+
+
+<br>
+
+
+![lab33](./screenshots/lab33.jpg)
+
+-----------
+
 
 
 
