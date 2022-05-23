@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -44,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     TaskListRecycleReviewAdapter adapter;
     List<Task> tasks = null;
 
-
+    Toast toast ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,40 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         tasks = new ArrayList<>();
 
 
-//        Team team1 =
-//                Team.builder()
-//                .name("Robots")
-//                .build();
-//
-//        Amplify.API.mutate(
-//                ModelMutation.create(team1),
-//                successResponse -> Log.i(TAG, "Made a new Team of Robots!"),
-//                failureResponse -> Log.i(TAG, "Failed to make team of Robots.")
-//        );
-//
-//
-//        Team team2 =
-//                Team.builder()
-//                        .name("Humans")
-//                        .build();
-//
-//        Amplify.API.mutate(
-//                ModelMutation.create(team2),
-//                successResponse -> Log.i(TAG, "Made a new Team of Humans!"),
-//                failureResponse -> Log.i(TAG, "Failed to make team Humans.")
-//        );
-//
-//
-//        Team team3 =
-//                Team.builder()
-//                        .name("Elves")
-//                        .build();
-//
-//        Amplify.API.mutate(
-//                ModelMutation.create(team3),
-//                successResponse -> Log.i(TAG, "Made a new Team of Elves!"),
-//                failureResponse -> Log.i(TAG, "Failed to make team Elves.")
-//        );
+
 
         setUpAddTaskButton();
         setUpUserSettingsButton();
@@ -116,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
         Amplify.API.query(
                 ModelQuery.list(Task.class),
                 success -> {
-                    Log.i(TAG, "Updated Tasks Successfully!");
+
                     tasks.clear();
                     for(Task databaseTask : success.getData()){
                         if (userTeamName.equals("No Team")){
@@ -131,7 +99,10 @@ public class HomeActivity extends AppCompatActivity {
                     });
                 },
 
-                failure -> Log.i(TAG, "failed with this response: ")
+                failure ->  toast = Toast.makeText(getApplicationContext(), "failed with this response: ", Toast.LENGTH_LONG)
+
+
+
         );
     }
 

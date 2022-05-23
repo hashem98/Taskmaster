@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -26,7 +27,7 @@ public class UserSettingsActivity extends AppCompatActivity {
     SharedPreferences preferences;
     public static final String USER_USERNAME_TAG = "userUsername";
     Spinner teamSpinner = null;
-
+Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +73,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         Amplify.API.query(
                 ModelQuery.list(Team.class),
                 success -> {
-                    Log.i(TAG, "Read Teams Successfully!");
+
                     ArrayList<String> teamNames = new ArrayList<>();
                     ArrayList<Team> teams = new ArrayList<>();
                     for(Team team : success.getData()){
@@ -88,7 +89,7 @@ public class UserSettingsActivity extends AppCompatActivity {
                     });
                 },
                 failure -> {
-                    Log.i(TAG, "Failed to add team names!");
+                    toast = Toast.makeText(getApplicationContext(), "failed with this response: ", Toast.LENGTH_LONG);
                 }
         );
 
