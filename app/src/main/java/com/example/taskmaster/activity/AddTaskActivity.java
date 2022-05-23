@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 import com.amplifyframework.AmplifyException;
@@ -38,7 +39,7 @@ public class AddTaskActivity extends AppCompatActivity {
     private static final String TAG = "TASK";
     Spinner taskStateSpinner = null;
     Spinner teamSpinner = null;
-
+    Toast toast ;
     CompletableFuture<List<Team>> teamsFuture = null;
 
 
@@ -124,7 +125,7 @@ public class AddTaskActivity extends AppCompatActivity {
         Amplify.API.query(
                 ModelQuery.list(Team.class),
                 success -> {
-                    Log.i(TAG, "Read Teams Successfully!");
+
                     ArrayList<String> teamNames = new ArrayList<>();
                     ArrayList<Team> teams = new ArrayList<>();
                     for(Team team : success.getData()){
@@ -143,7 +144,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 },
                 failure -> {
                     teamsFuture.complete(null);
-                    Log.i(TAG, "Failed to add team names!");
+                    toast = Toast.makeText(getApplicationContext(), "failed with this response: ", Toast.LENGTH_LONG);
                 }
         );
 
