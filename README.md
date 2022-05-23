@@ -92,7 +92,7 @@
 ![lab33](./screenshots/lab33.jpg)
 
 -----------
-# Lab33
+# Lab34
 ##  For today's lab ..
 * I went go through the process of publishing to the Google Play Store.
 * I Built a signed AAB for your application. Included that AAB in my GitHub repo (amplify folder).
