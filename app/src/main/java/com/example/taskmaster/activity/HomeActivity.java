@@ -17,12 +17,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Task;
@@ -45,14 +45,15 @@ public class HomeActivity extends AppCompatActivity {
     TaskListRecycleReviewAdapter adapter;
     List<Task> tasks = null;
 
-    Toast toast ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
-           Amplify.addPlugin(new AWSDataStorePlugin());
+            Amplify.addPlugin(new AWSDataStorePlugin());
             Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
 
             Log.i("Tutorial", "Initialized Amplify");
@@ -84,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
         Amplify.API.query(
                 ModelQuery.list(Task.class),
                 success -> {
-
+                    Log.i(TAG, "Updated Tasks Successfully!");
                     tasks.clear();
                     for(Task databaseTask : success.getData()){
                         if (userTeamName.equals("No Team")){
@@ -99,10 +100,7 @@ public class HomeActivity extends AppCompatActivity {
                     });
                 },
 
-                failure ->  toast = Toast.makeText(getApplicationContext(), "failed with this response: ", Toast.LENGTH_LONG)
-
-
-
+                failure -> Log.i(TAG, "failed with this response: ")
         );
     }
 

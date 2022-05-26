@@ -38,6 +38,8 @@ dependencies {
     implementation 'com.amplifyframework:aws-api:1.35.3'
     implementation 'com.amplifyframework:aws-datastore:1.35.3'
 
+    implementation 'com.amplifyframework:aws-auth-cognito:1.35.4'
+
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
