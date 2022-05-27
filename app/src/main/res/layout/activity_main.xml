@@ -34,8 +34,8 @@
 
     <TextView
         android:id="@+id/textHomeUsernameView"
-        android:layout_width="128dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="195dp"
@@ -44,13 +44,14 @@
         android:textColor="#FFF"
         app:layout_constraintBottom_toTopOf="@+id/textHomeTeamNameView"
         app:layout_constraintEnd_toStartOf="@+id/userSettingsImage"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textHomeTeamNameView"
-        android:layout_width="128dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="255dp"
@@ -59,6 +60,7 @@
         android:textColor="#FFF"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHomeUsernameView" />
 
