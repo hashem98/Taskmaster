@@ -1,37 +1,30 @@
 package com.example.taskmaster.activity;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.api.aws.AWSApiPlugin;
-import com.amplifyframework.api.graphql.model.ModelMutation;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.amplifyframework.api.graphql.model.ModelQuery;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.AuthUser;
+import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Task;
-import com.amplifyframework.datastore.generated.model.Team;
 import com.example.taskmaster.R;
 import com.example.taskmaster.adapter.TaskListRecycleReviewAdapter;
-import com.example.taskmaster.database.AppDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,16 +43,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            Amplify.addPlugin(new AWSDataStorePlugin());
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.configure(getApplicationContext());
-
-            Log.i("Tutorial", "Initialized Amplify");
-        } catch (AmplifyException e) {
-            Log.e("Tutorial", "Could not initialize Amplify", e);
-        }
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         tasks = new ArrayList<>();
 
@@ -72,15 +55,76 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.logout:
+                logout();
+                break;
+            case R.id.reset:
+                // TODO: 5/25/22 Implement reset password
+                break;
+            default:
+        }
+        return true;
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
+
     protected void onResume(){
         super.onResume();
-        String userUsername = preferences.getString(UserSettingsActivity.USER_USERNAME_TAG,"No Username");
+
         String userTeamName = preferences.getString(UserSettingsActivity.USER_TEAM_NAME_TAG, "No Team");
-        ((TextView) findViewById(R.id.textHomeUsernameView)).setText(getString(R.string.username_with_input, userUsername));
         ((TextView) findViewById(R.id.textHomeTeamNameView)).setText(getString(R.string.team_name_with_input, userTeamName));
+
+
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        String username = "";
+        if (authUser == null)
+        {
+            String userUsername = preferences.getString(UserSettingsActivity.USER_USERNAME_TAG, "No Username");
+            ((TextView) findViewById(R.id.textHomeUsernameView)).setVisibility(View.INVISIBLE);
+
+        }
+        else  // authUser is not null
+        {
+            Log.i(TAG, "Username is: " + username);
+
+
+            // Not strictly required for your lab, but useful for your project
+            Amplify.Auth.fetchUserAttributes(
+                    success ->
+                    {
+                        Log.i(TAG, "Fetch user attributes succeeded for username: " + username);
+
+                        for (AuthUserAttribute userAttribute : success)
+                        {
+                            if (userAttribute.getKey().getKeyString().equals("nickname"))
+                            {
+                                String userNickname = userAttribute.getValue();
+                                runOnUiThread(() ->
+                                        {
+                                            ((TextView) findViewById(R.id.textHomeUsernameView)).setText(userNickname);
+                                            ((TextView) findViewById(R.id.textHomeUsernameView)).setVisibility(View.VISIBLE);
+                                        }
+                                );
+                            }
+                        }
+                    },
+                    failure ->
+                    {
+                        Log.i(TAG, "Fetch user attributes failed: " + failure.toString());
+                    }
+            );
+        }
 
         Amplify.API.query(
                 ModelQuery.list(Task.class),
@@ -142,4 +186,14 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    private void logout() {
+        Amplify.Auth.signOut(
+                () -> {
+                    Log.i(TAG, "Signed out successfully");
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                    finish();
+                },
+                error -> Log.e(TAG, error.toString())
+        );
+    }
 }

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".activity.AmplifyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,11 +23,22 @@
             android:name=".activity.AddTaskActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.VerifyAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AllTasksActivity"
             android:exported="false"
             android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.HomeActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

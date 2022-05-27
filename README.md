@@ -100,6 +100,20 @@
 
 
 -----------
+# Lab36
+##  For today's lab ..
+* Cognito has been added to the Amplify setup. A user login and signup flow has been integrated into th app. Once the user has succesfully logged in, their username is displayed at the top of the homepage.
+* Users can logout of the application.
+
+
+
+
+
+<br>
+
+
+![lab36](./screenshots/lab36.jpg)
+
 
 
 

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 //import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.example.taskmaster.R;
