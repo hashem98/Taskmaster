@@ -4,6 +4,7 @@ subscription OnCreateTask {
     id
     title
     description
+    taskImageS3Key
     taskStatusEnum
     teamId
     teamName {
@@ -31,6 +32,7 @@ subscription OnUpdateTask {
     id
     title
     description
+    taskImageS3Key
     taskStatusEnum
     teamId
     teamName {
@@ -58,6 +60,7 @@ subscription OnDeleteTask {
     id
     title
     description
+    taskImageS3Key
     taskStatusEnum
     teamId
     teamName {
@@ -89,6 +92,7 @@ subscription OnCreateTeam {
         id
         title
         description
+        taskImageS3Key
         taskStatusEnum
         teamId
         createdAt
@@ -116,6 +120,7 @@ subscription OnUpdateTeam {
         id
         title
         description
+        taskImageS3Key
         taskStatusEnum
         teamId
         createdAt
@@ -143,6 +148,7 @@ subscription OnDeleteTeam {
         id
         title
         description
+        taskImageS3Key
         taskStatusEnum
         teamId
         createdAt
