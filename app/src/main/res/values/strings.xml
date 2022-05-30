@@ -19,5 +19,9 @@
     <string name="save">save</string>
     <string name="user_settings">setting</string>
     <string name="team_name_with_input">"Team: %1$s"</string>
+    <string name="team">team</string>
+    <string name="add_task_title">add title</string>
+    <string name="spinnerteam">spinner team</string>
+    <string name="Upload">Upload</string>
 
 </resources>

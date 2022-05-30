@@ -4,6 +4,7 @@ query GetTask($id: ID!) {
     id
     title
     description
+    taskImageS3Key
     taskStatusEnum
     teamId
     teamName {
@@ -36,6 +37,7 @@ query ListTasks(
       id
       title
       description
+      taskImageS3Key
       taskStatusEnum
       teamId
       teamName {
@@ -73,6 +75,7 @@ query SyncTasks(
       id
       title
       description
+      taskImageS3Key
       taskStatusEnum
       teamId
       teamName {
@@ -103,6 +106,7 @@ query GetTeam($id: ID!) {
         id
         title
         description
+        taskImageS3Key
         taskStatusEnum
         teamId
         createdAt

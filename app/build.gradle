@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.amplifyframework:aws-datastore:1.35.3'
 
     implementation 'com.amplifyframework:aws-auth-cognito:1.35.4'
+    implementation 'com.amplifyframework:aws-storage-s3:1.35.4'
 
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -58,6 +59,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0-alpha05'
     androidTestImplementation 'androidx.test:rules:1.4.1-alpha05'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha05'
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    // Glide v4 uses this new annotation processor -- see https://bumptech.github.io/glide/doc/generatedapi.html
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
 
 }

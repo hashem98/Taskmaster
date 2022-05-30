@@ -114,6 +114,23 @@
 
 ![lab36](./screenshots/lab36.jpg)
 
+-----------
+# Lab37
+##  For today's lab ..
+* Users can optionally select a file to attach to a task. If a user attaches a file to a task, the file is uploaded to S3, and associated with that task.
+* Users can now view the image associated with that Task.
+
+
+
+
+
+
+<br>
+
+
+![lab37](./screenshots/lab37.png)
+
+
 
 
 

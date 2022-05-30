@@ -34,6 +34,8 @@ public class HomeActivity extends AppCompatActivity {
     public static final String TASK_BODY_TAG = "BODY";
     public static final String TASK_STATE_TAG = "STATE";
     public final String TAG = "MESSAGE";
+    public static final String TASK_ID_TAG = "Task ID Tag";
+
     SharedPreferences preferences;
     TaskListRecycleReviewAdapter adapter;
     List<Task> tasks = null;

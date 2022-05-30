@@ -16,5 +16,12 @@
         }
       }
     }
+  },
+  "storage": {
+    "s309ef8095": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }
