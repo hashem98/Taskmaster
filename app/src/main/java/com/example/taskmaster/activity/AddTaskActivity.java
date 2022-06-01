@@ -35,7 +35,6 @@ import com.amplifyframework.datastore.generated.model.Team;
 import com.example.taskmaster.R;
 import com.google.android.material.snackbar.Snackbar;
 
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -82,13 +81,14 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         }
 
+        setUpDeleteImageButton();
         setUpSpinners();
         setUpSaveButtons();
         setUpAddImageButton();
     }
 
     private void setUpSaveButtons() {
-        Button addTaskButton = findViewById(R.id.buttonAddTaskTaskActivity);
+        LinearLayout addTaskButton = findViewById(R.id.buttonAddTaskTaskActivity);
         addTaskButton.setOnClickListener(v -> {
 
             String title = ((EditText) findViewById(R.id.editTextTaskTitle)).getText().toString();
@@ -235,7 +235,13 @@ public class AddTaskActivity extends AppCompatActivity {
         );
     }
 
-
+    private void setUpDeleteImageButton() {
+        Button deleteImageButton = (Button)findViewById(R.id.buttonAddTaskRemoveUploadImage);
+        deleteImageButton.setOnClickListener(v ->
+        {
+            deleteImageFromS3();
+        });
+    }
 
     private void deleteImageFromS3() {
         if (!imageToUploadKey.isEmpty())
@@ -271,10 +277,12 @@ public class AddTaskActivity extends AppCompatActivity {
     private void updateImageButtons()
     {
         Button addImageButton = (Button)findViewById(R.id.buttonAddTaskUploadImage);
+        Button deleteImageButton = (Button)findViewById(R.id.buttonAddTaskRemoveUploadImage);
         if (imageToUploadKey.isEmpty())
         {
             runOnUiThread(() ->
                     {
+                        deleteImageButton.setVisibility(View.INVISIBLE);
                         addImageButton.setVisibility(View.VISIBLE);
                     }
             );
@@ -283,6 +291,7 @@ public class AddTaskActivity extends AppCompatActivity {
         {
             runOnUiThread(() ->
                     {
+                        deleteImageButton.setVisibility(View.VISIBLE);
                         addImageButton.setVisibility(View.INVISIBLE);
                     }
             );
