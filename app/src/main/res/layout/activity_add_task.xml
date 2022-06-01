@@ -6,92 +6,153 @@
     android:id="@+id/addTaskActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AddTaskActivity"
-    android:background="@color/teal_200"
-    >
+    android:background="@color/purple_200"
+    tools:context=".activity.AddTaskActivity">
+
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:text="Team"
-        android:textColor="@color/cardview_dark_background"
+        android:text="@string/team"
+        android:textColor="#FFF"
         app:layout_constraintBottom_toTopOf="@+id/editAddTaskStateSpinnerTeam"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewTaskActivity"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+
         android:text="@string/add_task_two"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        app:layout_constraintVertical_bias="0.056" />
 
     <EditText
         android:id="@+id/editTextTaskTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/add_task_title"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:tag="asdasd"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTaskActivity"
         app:layout_constraintVertical_bias="0.074"
         tools:ignore="LabelFor" />
 
+
     <EditText
         android:id="@+id/editTextTaskDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/task_description"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTaskTitle"
-        app:layout_constraintVertical_bias="0.129"
+        app:layout_constraintVertical_bias="0.065"
         tools:ignore="LabelFor" />
 
-    <Button
+
+    <LinearLayout
         android:id="@+id/buttonAddTaskTaskActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/bg_green"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:text="@string/add_task"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editAddTaskStateSpinnerTeam"
+        app:layout_constraintVertical_bias="0.898">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/total_tasks_0"
-        android:textColor="@color/cardview_dark_background"
-        app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_task_title"
+            android:textColor="#FFF"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@+id/editAddTaskStateSpinnerTeam"
+        tools:layout_editor_absoluteX="30dp">
+
+        <Button
+            android:id="@+id/buttonAddTaskUploadImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:visibility="visible"
+            android:backgroundTint="@drawable/orange"
+            android:elevation="30dp"
+            android:text="Upload Image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <Button
+            android:id="@+id/buttonAddTaskRemoveUploadImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:elevation="30dp"
+            android:text="Remove Image"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageViewAddTaskUploadFile"
+        android:layout_width="312dp"
+        android:layout_height="197dp"
+        android:layout_margin="30dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddTaskTaskActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddTaskSubmit"
-        app:layout_constraintVertical_bias="0.481" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textViewAddTaskSubmit"
@@ -99,8 +160,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:textColor="@color/cardview_dark_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAddTaskTaskActivity" />
 
@@ -109,27 +168,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="326dp"
         android:text="@string/task_name"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="#FFF"
         app:layout_constraintBottom_toTopOf="@+id/editTextTaskTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTaskActivity" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="293dp"
         android:text="@string/task_description"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="#FFF"
         app:layout_constraintBottom_toTopOf="@+id/editTextTaskDescription"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskTitle" />
 
     <Spinner
         android:id="@+id/editAddTaskStateSpinner"
-        android:layout_width="360dp"
-        android:layout_height="63dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
         android:contentDescription="@string/state"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
@@ -137,10 +209,14 @@
 
     <Spinner
         android:id="@+id/editAddTaskStateSpinnerTeam"
-        android:layout_width="360dp"
-        android:layout_height="63dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
-        android:contentDescription="@string/spinnerteam"
+        android:layout_marginEnd="30dp"
+        android:contentDescription="@string/state"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,34 +227,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="323dp"
         android:text="@string/state"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="#FFF"
         app:layout_constraintBottom_toTopOf="@+id/editAddTaskStateSpinner"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonAddTaskUploadImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="157dp"
-        android:layout_marginEnd="166dp"
-        android:text="Upload Image"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddTaskTaskActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editAddTaskStateSpinnerTeam" />
-
-    <ImageView
-        android:id="@+id/imageViewAddTaskUploadFile"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="30dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddTaskTaskActivity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddTaskUploadImage"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

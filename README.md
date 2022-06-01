@@ -130,6 +130,21 @@
 
 ![lab37](./screenshots/lab37.png)
 
+-----------
+# Lab38
+##  For today's lab ..
+* An intent filter was added to the application such that a user can hit the “share” button on an image in another application, choose TaskMaster as the app to share that image with, and be taken directly to the Add a Task activity with that image pre-selected.
+
+
+
+
+
+<br>
+
+
+![lab38](./screenshots/lab38.png)
+
+
 
 
 
