@@ -22,5 +22,13 @@ export type AmplifyDependentResourcesAttributes = {
             "BucketName": "string",
             "Region": "string"
         }
+    },
+    "geo": {
+        "map1588923a": {
+            "Name": "string",
+            "Style": "string",
+            "Region": "string",
+            "Arn": "string"
+        }
     }
 }

@@ -23,5 +23,23 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": []
     }
+  },
+  "geo": {
+    "map1588923a": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Map",
+      "mapStyle": "VectorEsriStreets",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "taskmaster14eb7e9a",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    }
   }
 }

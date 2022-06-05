@@ -6,6 +6,8 @@ subscription OnCreateTask {
     description
     taskImageS3Key
     taskStatusEnum
+    taskLatitude
+    taskLongitude
     teamId
     teamName {
       id
@@ -34,6 +36,8 @@ subscription OnUpdateTask {
     description
     taskImageS3Key
     taskStatusEnum
+    taskLatitude
+    taskLongitude
     teamId
     teamName {
       id
@@ -62,6 +66,8 @@ subscription OnDeleteTask {
     description
     taskImageS3Key
     taskStatusEnum
+    taskLatitude
+    taskLongitude
     teamId
     teamName {
       id
@@ -94,6 +100,8 @@ subscription OnCreateTeam {
         description
         taskImageS3Key
         taskStatusEnum
+        taskLatitude
+        taskLongitude
         teamId
         createdAt
         updatedAt
@@ -122,6 +130,8 @@ subscription OnUpdateTeam {
         description
         taskImageS3Key
         taskStatusEnum
+        taskLatitude
+        taskLongitude
         teamId
         createdAt
         updatedAt
@@ -150,6 +160,8 @@ subscription OnDeleteTeam {
         description
         taskImageS3Key
         taskStatusEnum
+        taskLatitude
+        taskLongitude
         teamId
         createdAt
         updatedAt

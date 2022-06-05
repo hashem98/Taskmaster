@@ -37,7 +37,10 @@ configurations {
 dependencies {
     implementation 'com.amplifyframework:aws-api:1.35.3'
     implementation 'com.amplifyframework:aws-datastore:1.35.3'
-
+    implementation 'com.amplifyframework:aws-geo-location:1.0.0'
+    // Add this dependency to integrate MapLibre into your app
+    implementation 'com.amplifyframework:maplibre-adapter:1.0.0'
+implementation 'com.amazonaws:aws-java-sdk-code-generator'
     implementation 'com.amplifyframework:aws-auth-cognito:1.35.4'
     implementation 'com.amplifyframework:aws-storage-s3:1.35.4'
 
