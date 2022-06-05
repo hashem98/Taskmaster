@@ -6,6 +6,8 @@ type Task @model @auth(rules: [{allow: public}]) {
   description: String
   taskImageS3Key: String
   taskStatusEnum: TaskStatusEnum
+  taskLatitude: String
+  taskLongitude: String
   teamId: ID! @index(name: "byTeam", sortKeyFields: ["title"])
   teamName: Team @belongsTo(fields: ["teamId"])
 }

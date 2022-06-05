@@ -3,6 +3,7 @@ package com.example.taskmaster.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,12 +25,13 @@ import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.example.taskmaster.R;
+import com.example.taskmaster.adapter.GeoLocation;
 import com.example.taskmaster.adapter.TaskListRecycleReviewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class HomeActivity extends AppCompatActivity {
     public static final String TASK_TITLE_TAG = "TASK";
     public static final String TASK_BODY_TAG = "BODY";
@@ -47,8 +50,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         tasks = new ArrayList<>();
-
-
+//        GeoLocation getGeoLocationRequest = new GeoLocation();
+// String ss = getGeoLocationRequest.;
+//        Log.i(TAG, "onCreate: GetGeoLocationRequest "+ss);
 
 
         setUpAddTaskButton();

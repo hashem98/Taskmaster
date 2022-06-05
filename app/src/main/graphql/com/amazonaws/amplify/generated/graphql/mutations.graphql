@@ -9,6 +9,8 @@ mutation CreateTask(
     description
     taskImageS3Key
     taskStatusEnum
+    taskLatitude
+    taskLongitude
     teamId
     teamName {
       id
@@ -40,6 +42,8 @@ mutation UpdateTask(
     description
     taskImageS3Key
     taskStatusEnum
+    taskLatitude
+    taskLongitude
     teamId
     teamName {
       id
@@ -71,6 +75,8 @@ mutation DeleteTask(
     description
     taskImageS3Key
     taskStatusEnum
+    taskLatitude
+    taskLongitude
     teamId
     teamName {
       id
@@ -106,6 +112,8 @@ mutation CreateTeam(
         description
         taskImageS3Key
         taskStatusEnum
+        taskLatitude
+        taskLongitude
         teamId
         createdAt
         updatedAt
@@ -137,6 +145,8 @@ mutation UpdateTeam(
         description
         taskImageS3Key
         taskStatusEnum
+        taskLatitude
+        taskLongitude
         teamId
         createdAt
         updatedAt
@@ -168,6 +178,8 @@ mutation DeleteTeam(
         description
         taskImageS3Key
         taskStatusEnum
+        taskLatitude
+        taskLongitude
         teamId
         createdAt
         updatedAt
