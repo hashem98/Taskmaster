@@ -19,17 +19,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.analytics.AnalyticsEvent;
+import com.amplifyframework.analytics.UserProfile;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.example.taskmaster.R;
-import com.example.taskmaster.adapter.GeoLocation;
 import com.example.taskmaster.adapter.TaskListRecycleReviewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class HomeActivity extends AppCompatActivity {
@@ -50,11 +52,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         tasks = new ArrayList<>();
-//        GeoLocation getGeoLocationRequest = new GeoLocation();
-// String ss = getGeoLocationRequest.;
-//        Log.i(TAG, "onCreate: GetGeoLocationRequest "+ss);
+        UserProfile.Location location = UserProfile.Location.builder()     .build();
+        Log.i(TAG, "onCreate: GetGeoLocationRequest "+location.getLatitude());
 
-
+        init();
         setUpAddTaskButton();
         setUpUserSettingsButton();
         setUpTaskListRecycleView();
@@ -202,4 +203,14 @@ public class HomeActivity extends AppCompatActivity {
                 error -> Log.e(TAG, error.toString())
         );
     }
+    private void init(){
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("openedApp")
+                .addProperty("timeOpened", Long.toString(new Date().getTime()))
+                .addProperty("eventDescription", "Opened HomeActivity")
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
+    }
+
 }
