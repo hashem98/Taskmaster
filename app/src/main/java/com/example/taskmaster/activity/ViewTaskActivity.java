@@ -1,16 +1,23 @@
 package com.example.taskmaster.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -20,13 +27,19 @@ import com.amplifyframework.datastore.generated.model.Team;
 import com.example.taskmaster.R;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class ViewTaskActivity extends AppCompatActivity {
-
+Context context=this;
     private static final String TAG = "Edit Task";
+    private final MediaPlayer mp = new MediaPlayer();
 
     private Task taskToEdit = null;
     private CompletableFuture<Task> taskCompletableFuture = null;
@@ -147,5 +160,76 @@ public class ViewTaskActivity extends AppCompatActivity {
         } else {
             taskViewStateView.setText(R.string.no_task_state);
         }
+        taskViewBodyView.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                String[] event = {"Translate Text", "Speech"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Pick an Action");
+
+                builder.setItems(event, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // the user clicked on colors[which]
+                        if (which==0)
+                        {
+                            String taskDescription = taskToEdit.getDescription();
+
+                            Amplify.Predictions.translateText(taskDescription,
+                                    result -> {
+                                        Log.i("MyAmplifyApp", result.getTranslatedText());
+                                        runOnUiThread(() ->
+                                        {
+                                            taskViewBodyView.setText(result.getTranslatedText());
+                                        });
+
+                                    },
+                                    error -> Log.e("MyAmplifyApp", "Translation failed", error)
+                            );
+                        }
+                        else
+                        {
+                            String taskDescription = taskToEdit.getDescription();
+
+                            Amplify.Predictions.convertTextToSpeech(
+                                    taskDescription,
+                                    result -> {
+                                        playAudio(result.getAudioData());
+
+                                    },
+                                    error -> Log.e(TAG, "Conversion failed", error)
+                            );
+
+                        }
+                    }
+                });
+                builder.show();
+
+
+                return true;
+            }
+        });
     }
+    private void playAudio(InputStream data) {
+        File mp3File = new File(getCacheDir(), "audio.mp3");
+
+        try (OutputStream out = new FileOutputStream(mp3File)) {
+            byte[] buffer = new byte[8 * 1_024];
+            int bytesRead;
+            while ((bytesRead = data.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+            mp.reset();
+            mp.setOnPreparedListener(MediaPlayer::start);
+            mp.setDataSource(new FileInputStream(mp3File).getFD());
+            mp.prepareAsync();
+        } catch (IOException error) {
+            Log.e("MyAmplifyApp", "Error writing audio file", error);
+        }
+    }
+
+
+
 }

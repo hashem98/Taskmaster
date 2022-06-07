@@ -144,6 +144,24 @@
 
 ![lab38](./screenshots/lab38.png)
 
+-----------
+# Lab41
+##  For today's lab ..
+* Added Analytics
+   *Events are now being tracked using Amazon Pinpoint. Everytime a user enters the Home Activity, it is recorded.
+* On task body thers on long click lisenrt showing a dialog box
+   * Added ability to hear Task description spoken aloud on View Task page.
+   * Added ability to view a translated Task description to Spanish on View Task page.
+
+
+
+
+<br>
+
+
+![lab41](./screenshots/lab41.png)
+
+
 
 
 
