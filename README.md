@@ -161,6 +161,24 @@
 
 ![lab41](./screenshots/lab41.png)
 
+-----------
+# Lab42
+##  For today's lab ..
+* Google ads (AdMob) has been incorporated into activity.
+* A banner ad is now displayed at bottom of main activity.
+* An interstitial ad can be viewed upon clicking Interstitial button.
+* An rewarded ad can be viewed after clicking Rewarded button.
+
+
+
+
+
+<br>
+
+
+![lab4](./screenshots/lab42.png)
+
+
 
 
 
