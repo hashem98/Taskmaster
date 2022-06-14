@@ -145,6 +145,23 @@
 ![lab38](./screenshots/lab38.png)
 
 -----------
+# Lab39
+##  For today's lab ..
+* When the user adds a task, their location is retrieved and included as part of the saved Task.
+* The user can now see the location associated with a given task.
+
+
+
+
+<br>
+
+
+![lab39](./screenshots/lab39.png)
+
+-----------
+
+
+
 # Lab41
 ##  For today's lab ..
 * Added Analytics

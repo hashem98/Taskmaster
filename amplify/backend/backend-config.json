@@ -1,63 +1,90 @@
 {
   "api": {
-    "amplifyDatasource": {
+    "taskmaster": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
+      "dependsOn": [],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "description": "",
               "apiKeyExpirationDays": 7
             }
-          }
+          },
+          "additionalAuthenticationProviders": []
         }
       }
     }
   },
-  "storage": {
-    "s309ef8095": {
-      "service": "S3",
+  "auth": {
+    "taskmastereca2e7cc": {
+      "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
     }
   },
-  "geo": {
-    "map1588923a": {
-      "isDefault": true,
+  "function": {
+    "S3Triggerf974f7f2": {
+      "service": "Lambda",
       "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorEsriStreets",
-      "accessType": "AuthorizedAndGuestUsers",
+      "build": true
+    }
+  },
+  "storage": {
+    "s30144fff8": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
-          "category": "auth",
-          "resourceName": "taskmaster14eb7e9a",
+          "category": "function",
+          "resourceName": "S3Triggerf974f7f2",
           "attributes": [
-            "UserPoolId"
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
           ]
         }
       ]
+    }
+  },
+  "predictions": {
+    "translateTextebb8ea2f": {
+      "providerPlugin": "awscloudformation",
+      "service": "Translate",
+      "convertType": "translateText"
+    },
+    "speechGenerator7403de41": {
+      "providerPlugin": "awscloudformation",
+      "service": "Polly",
+      "convertType": "speechGenerator"
     }
   },
   "analytics": {
     "taskmaster": {
       "service": "Pinpoint",
       "providerPlugin": "awscloudformation"
-    }
-  },
-  "predictions": {
-    "translateText06c6036f": {
-      "providerPlugin": "awscloudformation",
-      "service": "Translate",
-      "convertType": "translateText"
-    },
-    "speechGenerator8bf4793d": {
-      "providerPlugin": "awscloudformation",
-      "service": "Polly",
-      "convertType": "speechGenerator"
     }
   }
 }
