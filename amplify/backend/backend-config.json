@@ -86,5 +86,40 @@
       "service": "Pinpoint",
       "providerPlugin": "awscloudformation"
     }
+  },
+  "geo": {
+    "placeindexd8f0120e": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex",
+      "dataProvider": "HERE",
+      "dataSourceIntendedUse": "SingleUse",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "taskmastereca2e7cc",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "map3dd2b68c": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Map",
+      "mapStyle": "VectorEsriStreets",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "taskmastereca2e7cc",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    }
   }
 }

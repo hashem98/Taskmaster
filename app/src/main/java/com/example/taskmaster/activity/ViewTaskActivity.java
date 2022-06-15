@@ -24,6 +24,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.Team;
+import com.amplifyframework.geo.maplibre.view.MapLibreView;
 import com.example.taskmaster.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -32,6 +33,10 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,6 +60,9 @@ public class ViewTaskActivity extends AppCompatActivity {
     FusedLocationProviderClient locationProviderClient = null;
     Geocoder geocoder;
     private final MediaPlayer mp = new MediaPlayer();
+  double lat=0.0;
+  double longt=0.0;
+    private MapLibreView mapView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +74,35 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         setUpUIElementsOG();
         setUpUIElementsEdit();
-
+        setUpTheMap();
     }
 
 
+private void setUpTheMap(){
+    mapView = findViewById(R.id.mapView);
+    mapView.getMapAsync(map -> {
+        LatLng seattle = new LatLng(lat, longt);
+        map.setCameraPosition(
+                new CameraPosition.Builder()
+                        .target(seattle)
+                        .zoom(13.0)
+                        .build()
+        );
+    });
+    mapView.getStyle((map, style) -> {
+        LatLng spaceNeedle = new LatLng(lat, longt);
+        mapView.symbolManager.create(
+                new SymbolOptions()
+                        .withIconImage("place")
+                        .withLatLng(spaceNeedle)
+        );
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(spaceNeedle, 16.0));
+    });
 
+
+
+
+}
     private void setUpUIElementsEdit() {
         Intent callingIntent = getIntent();
         String taskId = null;
@@ -144,16 +176,18 @@ public class ViewTaskActivity extends AppCompatActivity {
                     if (location == null) {
                         Log.e(TAG, "Location callback was null!");
                     }
-                    String currentLatitude = Double.toString(location.getLatitude());
-                    String currentLongitude = Double.toString(location.getLongitude());
-                    Log.i(TAG, "Our current latitude: " + currentLatitude);
-                    Log.i(TAG, "Our current longitude: " + currentLongitude);
+                    lat=location.getLatitude();
+                    longt=location.getLongitude();
+                    String currentLatitude = Double.toString(lat);
+                    String currentLongitude = Double.toString(longt);
+                    Log.i(TAG, "Our current latitude: " + lat);
+                    Log.i(TAG, "Our current longitude: " + longt);
                 }
         );
 
 
-        TextView taskViewLatitude = (TextView) findViewById(R.id.viewTaskLatitude);
-        TextView taskViewLongitude = (TextView) findViewById(R.id.viewTaskLongitude);
+//        TextView taskViewLatitude = (TextView) findViewById(R.id.viewTaskLatitude);
+//        TextView taskViewLongitude = (TextView) findViewById(R.id.viewTaskLongitude);
 
         geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         LocationRequest locationRequest = LocationRequest.create();
@@ -181,11 +215,11 @@ public class ViewTaskActivity extends AppCompatActivity {
         locationProviderClient.requestLocationUpdates(locationRequest, locationCallback, getMainLooper());
 
 
-        runOnUiThread(() -> {
-                    taskViewLatitude.setText(taskToEdit.getTaskLatitude());
-                    taskViewLongitude.setText(taskToEdit.getTaskLongitude());
-                }
-        );
+//        runOnUiThread(() -> {
+//                    taskViewLatitude.setText(taskToEdit.getTaskLatitude());
+//                    taskViewLongitude.setText(taskToEdit.getTaskLongitude());
+//                }
+//        );
 
 
         String imageS3Key = taskToEdit.getTaskImageS3Key();

@@ -49,5 +49,18 @@ export type AmplifyDependentResourcesAttributes = {
             "Id": "string",
             "appName": "string"
         }
+    },
+    "geo": {
+        "placeindexd8f0120e": {
+            "Name": "string",
+            "Region": "string",
+            "Arn": "string"
+        },
+        "map3dd2b68c": {
+            "Name": "string",
+            "Style": "string",
+            "Region": "string",
+            "Arn": "string"
+        }
     }
 }
