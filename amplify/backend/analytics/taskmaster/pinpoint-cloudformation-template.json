@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.2.0\",\"stackType\":\"analytics-Pinpoint\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.4.0\",\"stackType\":\"analytics-Pinpoint\",\"metadata\":{}}",
   "Parameters": {
     "appName": {
       "Type": "String"
@@ -118,25 +118,6 @@
         "Policies": [
           {
             "PolicyName": {
-              "Ref": "cloudWatchPolicyName"
-            },
-            "PolicyDocument": {
-              "Version": "2012-10-17",
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "logs:CreateLogGroup",
-                    "logs:CreateLogStream",
-                    "logs:PutLogEvents"
-                  ],
-                  "Resource": "arn:aws:logs:*:*:*"
-                }
-              ]
-            }
-          },
-          {
-            "PolicyName": {
               "Ref": "pinpointPolicyName"
             },
             "PolicyDocument": {
@@ -171,6 +152,42 @@
             }
           }
         ]
+      }
+    },
+    "LambdaCloudWatchPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": {
+          "Ref": "cloudWatchPolicyName"
+        },
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Resource": {
+                "Fn::Sub": [
+                  "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${lambdaName}:log-stream:*",
+                  {
+                    "lambdaName": {
+                      "Ref": "PinpointFunction"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
       }
     },
     "PinpointFunction": {
@@ -307,6 +324,7 @@
     },
     "CognitoUnauthPolicy": {
       "Type": "AWS::IAM::Policy",
+      "Condition": "ShouldCreatePinpointApp",
       "Properties": {
         "PolicyName": {
           "Ref": "unauthPolicyName"
@@ -394,6 +412,7 @@
     },
     "CognitoAuthPolicy": {
       "Type": "AWS::IAM::Policy",
+      "Condition": "ShouldCreatePinpointApp",
       "Properties": {
         "PolicyName": {
           "Ref": "authPolicyName"

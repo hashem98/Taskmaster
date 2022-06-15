@@ -1,13 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
     "api": {
-        "amplifyDatasource": {
+        "taskmaster": {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
     },
     "auth": {
-        "taskmaster14eb7e9a": {
+        "taskmastereca2e7cc": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -17,18 +17,30 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientID": "string"
         }
     },
+    "function": {
+        "S3Triggerf974f7f2": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        }
+    },
     "storage": {
-        "s309ef8095": {
+        "s30144fff8": {
             "BucketName": "string",
             "Region": "string"
         }
     },
-    "geo": {
-        "map1588923a": {
-            "Name": "string",
-            "Style": "string",
-            "Region": "string",
-            "Arn": "string"
+    "predictions": {
+        "translateTextebb8ea2f": {
+            "region": "string",
+            "sourceLang": "string",
+            "targetLang": "string"
+        },
+        "speechGenerator7403de41": {
+            "region": "string",
+            "language": "string",
+            "voice": "string"
         }
     },
     "analytics": {
@@ -36,18 +48,6 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "Id": "string",
             "appName": "string"
-        }
-    },
-    "predictions": {
-        "translateText06c6036f": {
-            "region": "string",
-            "sourceLang": "string",
-            "targetLang": "string"
-        },
-        "speechGenerator8bf4793d": {
-            "region": "string",
-            "language": "string",
-            "voice": "string"
         }
     }
 }

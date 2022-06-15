@@ -77,7 +77,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onInitializationComplete(@NonNull com.google.android.gms.ads.initialization.InitializationStatus initializationStatus) {
 
             }  });
-        advertisement();
+//        advertisement();
+
         init();
         setUpAddTaskButton();
         setUpUserSettingsButton();
@@ -238,106 +239,106 @@ public class HomeActivity extends AppCompatActivity {
 
         Amplify.Analytics.recordEvent(event);
     }
-    private  void advertisement(){
-        AdView mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-        AdRequest adRequestInterstitial = new AdRequest.Builder().build();
-
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequestInterstitial,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd;
-                        Log.i(TAG, "onAdLoaded");
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i(TAG, loadAdError.getMessage());
-                        mInterstitialAd = null;
-                    }
-                });
-
-
-        AdRequest rewardedAdRequest = new AdRequest.Builder().build();
-
-        RewardedAd.load(this, "ca-app-pub-3940256099942544/5224354917",
-                rewardedAdRequest, new RewardedAdLoadCallback()
-                {
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError)
-                    {
-                        // Handle the error.
-                        Log.d(TAG, loadAdError.getMessage());
-                        mRewardedAd = null;
-                    }
-
-                    @Override
-                    public void onAdLoaded(@NonNull RewardedAd rewardedAd)
-                    {
-                        mRewardedAd = rewardedAd;
-                        Log.d(TAG, "Ad was loaded.");
-
-                        mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                // Called when ad is shown.
-                                Log.d(TAG, "Ad was shown.");
-                                runOnUiThread(() -> Toast.makeText(HomeActivity.this, "Ad was shown!", Toast.LENGTH_SHORT).show());
-                            }
-
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                // Called when ad fails to show.
-                                Log.d(TAG, "Ad failed to show.");
-                            }
-
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                // Called when ad is dismissed.
-                                // Set the ad reference to null so you don't show the ad a second time.
-                                Log.d(TAG, "Ad was dismissed.");
-                                mRewardedAd = null;
-                            }
-                        });
-                    }
-                });
-        Button interstitialAdButton = (Button)findViewById(R.id.buttonInterstitialAdd1);
-        interstitialAdButton.setOnClickListener(b ->
-        {
-            if (mInterstitialAd != null)
-            {
-                mInterstitialAd.show(HomeActivity.this);
-            }
-            else
-            {
-                Log.d(TAG, "The interstitial ad wasn't ready yet, but we tried to show it.");
-            }
-        });
-
-
-        Button rewardedAdButton = (Button)findViewById(R.id.buttonInterstitialAdd2);
-        rewardedAdButton.setOnClickListener(b -> {
-            if (mRewardedAd != null) {
-                mRewardedAd.show(HomeActivity.this, new OnUserEarnedRewardListener() {
-                    @Override
-                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                        // Handle the reward.
-                        int rewardAmount = rewardItem.getAmount();
-                        String rewardType = rewardItem.getType();
-                        Log.d(TAG, "The user earned the reward. Amount is: " + rewardAmount + ", and type is: " + rewardType);
-                    }
-                });
-            } else {
-                Log.d(TAG, "The rewarded ad wasn't ready yet.");
-            }
-        });
-
-    }
+//    private  void advertisement(){
+//        AdView mAdView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+//
+//        AdRequest adRequestInterstitial = new AdRequest.Builder().build();
+//
+//        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequestInterstitial,
+//                new InterstitialAdLoadCallback() {
+//                    @Override
+//                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+//                        // The mInterstitialAd reference will be null until
+//                        // an ad is loaded.
+//                        mInterstitialAd = interstitialAd;
+//                        Log.i(TAG, "onAdLoaded");
+//                    }
+//
+//                    @Override
+//                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+//                        // Handle the error
+//                        Log.i(TAG, loadAdError.getMessage());
+//                        mInterstitialAd = null;
+//                    }
+//                });
+//
+//
+//        AdRequest rewardedAdRequest = new AdRequest.Builder().build();
+//
+//        RewardedAd.load(this, "ca-app-pub-3940256099942544/5224354917",
+//                rewardedAdRequest, new RewardedAdLoadCallback()
+//                {
+//                    @Override
+//                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError)
+//                    {
+//                        // Handle the error.
+//                        Log.d(TAG, loadAdError.getMessage());
+//                        mRewardedAd = null;
+//                    }
+//
+//                    @Override
+//                    public void onAdLoaded(@NonNull RewardedAd rewardedAd)
+//                    {
+//                        mRewardedAd = rewardedAd;
+//                        Log.d(TAG, "Ad was loaded.");
+//
+//                        mRewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+//                            @Override
+//                            public void onAdShowedFullScreenContent() {
+//                                // Called when ad is shown.
+//                                Log.d(TAG, "Ad was shown.");
+//                                runOnUiThread(() -> Toast.makeText(HomeActivity.this, "Ad was shown!", Toast.LENGTH_SHORT).show());
+//                            }
+//
+//                            @Override
+//                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+//                                // Called when ad fails to show.
+//                                Log.d(TAG, "Ad failed to show.");
+//                            }
+//
+//                            @Override
+//                            public void onAdDismissedFullScreenContent() {
+//                                // Called when ad is dismissed.
+//                                // Set the ad reference to null so you don't show the ad a second time.
+//                                Log.d(TAG, "Ad was dismissed.");
+//                                mRewardedAd = null;
+//                            }
+//                        });
+//                    }
+//                });
+//        Button interstitialAdButton = (Button)findViewById(R.id.buttonInterstitialAdd1);
+//        interstitialAdButton.setOnClickListener(b ->
+//        {
+//            if (mInterstitialAd != null)
+//            {
+//                mInterstitialAd.show(HomeActivity.this);
+//            }
+//            else
+//            {
+//                Log.d(TAG, "The interstitial ad wasn't ready yet, but we tried to show it.");
+//            }
+//        });
+//
+//
+//        Button rewardedAdButton = (Button)findViewById(R.id.buttonInterstitialAdd2);
+//        rewardedAdButton.setOnClickListener(b -> {
+//            if (mRewardedAd != null) {
+//                mRewardedAd.show(HomeActivity.this, new OnUserEarnedRewardListener() {
+//                    @Override
+//                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+//                        // Handle the reward.
+//                        int rewardAmount = rewardItem.getAmount();
+//                        String rewardType = rewardItem.getType();
+//                        Log.d(TAG, "The user earned the reward. Amount is: " + rewardAmount + ", and type is: " + rewardType);
+//                    }
+//                });
+//            } else {
+//                Log.d(TAG, "The rewarded ad wasn't ready yet.");
+//            }
+//        });
+//
+//    }
 
 }
