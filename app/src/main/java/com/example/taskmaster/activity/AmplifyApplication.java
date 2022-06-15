@@ -32,6 +32,7 @@ public class AmplifyApplication extends Application {
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(this));
             Amplify.addPlugin(new AWSPredictionsPlugin());
+            Amplify.addPlugin(new AWSLocationGeoPlugin());
             Amplify.configure(getApplicationContext());
 
 
